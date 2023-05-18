@@ -105,9 +105,7 @@
             </header>
             <div class="filter-content collapse show" id="collapse_3" style="">
               <div class="card-body">
-
                 <form action="{% url 'category' %}" method="GET">
-
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label>Min</label>
@@ -166,9 +164,11 @@
               <!-- img-wrap.// -->
               <figcaption class="info-wrap">
                 <div class="fix-height">
-                  <a href="/detail/{{product.id}}" class="title"
-                    >{{product.name}}</a
-                  >
+                  <h4>
+                    <a href="/detail/{{product.id}}" class="title"
+                      >{{product.name}}</a
+                    >
+                  </h4>
                   <div class="price-wrap mt-2">
                     <span class="price"
                       >${{product.price | floatformat:2}}</span
