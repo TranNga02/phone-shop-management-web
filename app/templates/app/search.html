@@ -1,6 +1,4 @@
 {% extends 'app/base.html' %} {% load static %} {% block content %}
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
   <div class="container">
     <div class="row">
       <aside class="col-md-3">
@@ -89,7 +87,7 @@
             </header>
             <div class="filter-content collapse show" id="collapse_3" style="">
               <div class="card-body">
-                <form action="{% url 'category' %}" method="GET">
+                <form action="{% url 'search_products' %}" method="GET">
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label>Min</label>
@@ -126,10 +124,14 @@
         </div>
       </aside>
       <main class="col-md-9">
-        <header class="border-bottom mb-4 pb-3"></header>
+        <header class="border-bottom mb-4 pb-3">
+          <div class="form-inline">
+            <span class="mr-md-auto">Result search for {{searched}}</span>
+          </div>
+        </header>
 
         <div class="row">
-          {%for product in product_list %}
+          {%for product in keys %}
           <div class="col-md-4">
             <figure class="card card-product-grid">
               <div class="img-wrap">
@@ -137,7 +139,7 @@
               </div>
               <figcaption class="info-wrap">
                 <div class="fix-height">
-                  <a href="/detail/{{product.id}}" class="title"
+                  <a href="product-detail.html" class="title"
                     >{{product.name}}</a
                   >
                   <div class="price-wrap mt-2">
