@@ -1,6 +1,10 @@
 var updateBtns = document.getElementsByClassName("update-cart");
+
+// vòng lặp qua từng phaanft tử , với mỗi nút click sẽ thực hiện hàm xử lý
 for (i = 0; i < updateBtns.length; i++) {
   updateBtns[i].addEventListener("click", function () {
+    // lấy các giá trị dữ liệu từ phần tử dc nhấp vào
+
     var productId = this.dataset.product;
     var action = this.dataset.action;
     console.log("productId", productId, "action", action);
@@ -31,6 +35,7 @@ function updateUserOrder(productId, action) {
       location.reload();
     });
 }
+
 // function addToCart(productId) {
 //   var url = "/add_to_cart/";
 //   var data = {
@@ -68,3 +73,4 @@ function updateUserOrder(productId, action) {
 //   };
 //   xhr.send(JSON.stringify(data));
 // }
+

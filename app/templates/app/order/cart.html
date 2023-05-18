@@ -29,8 +29,10 @@
                         >{{item.product.name}}</a
                       >
                       <p class="small text-muted">
-                        Ram: 4GB <br />
-                        Memory: 128GB
+
+                        Ram: {{item.product.ram}} <br />
+                        Memory: {{item.product.memory}}
+
                       </p>
                     </figcaption>
                   </figure>
@@ -118,9 +120,17 @@
                 height="26"
               />
             </p>
-            <a href="/place-order.html" class="btn btn-primary btn-block">
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'place-order' %}" class="btn btn-primary btn-block">
               Checkout
             </a>
+            {% else %}
+            <a href="{% url 'sign_in' %}" class="btn btn-primary btn-block">
+              Checkout
+            </a>
+            {% endif %}
+
             <a href="/" class="btn btn-light btn-block">Continue Shopping</a>
           </div>
           <!-- card-body.// -->
