@@ -17,7 +17,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for item in items %}
+              {% if user.is_authenticated %} {% for item in items %}
               <tr>
                 <td>
                   <figure class="itemside align-items-center">
@@ -29,8 +29,8 @@
                         >{{item.product.name}}</a
                       >
                       <p class="small text-muted">
-                        Ram: 4GB <br />
-                        Memory: 128GB
+                        Ram: {{item.product.ram}} <br />
+                        Memory: {{item.product.memory}}
                       </p>
                     </figcaption>
                   </figure>
@@ -41,7 +41,9 @@
                     <div class="input-group input-spinner">
                       <div class="input-group-prepend">
                         <button
-                          class="btn btn-light"
+                          data-product="{{item.product.id}}"
+                          data-action="remove"
+                          class="btn btn-light update-cart"
                           type="button"
                           id="button-plus"
                         >
@@ -55,7 +57,9 @@
                       />
                       <div class="input-group-append">
                         <button
-                          class="btn btn-light"
+                          data-product="{{item.product.id}}"
+                          data-action="add"
+                          class="btn btn-light update-cart"
                           type="button"
                           id="button-minus"
                         >
@@ -75,7 +79,7 @@
                 </td>
                 <td>
                   <div class="price-wrap">
-                    <var class="price">{{item.get_total}}</var>
+                    <var class="price">${{item.get_total}}</var>
                   </div>
                   <!-- price-wrap .// -->
                 </td>
@@ -83,7 +87,7 @@
                   <a href="" class="btn btn-danger"> Remove</a>
                 </td> -->
               </tr>
-              {% endfor %}
+              {% endfor %} {% endif %}
             </tbody>
           </table>
         </div>
@@ -95,7 +99,7 @@
           <div class="card-body">
             <dl class="dlist-align">
               <dt>Total price:</dt>
-              <dd class="text-right">$69.97</dd>
+              <dd class="text-right">${{total}}</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Tax:</dt>
@@ -103,7 +107,9 @@
             </dl>
             <dl class="dlist-align">
               <dt>Total:</dt>
-              <dd class="text-right text-dark b"><strong>$59.97</strong></dd>
+              <dd class="text-right text-dark b">
+                <strong>${{totals}}</strong>
+              </dd>
             </dl>
             <hr />
             <p class="text-center mb-3">
@@ -112,9 +118,16 @@
                 height="26"
               />
             </p>
-            <a href="app/place-order.html" class="btn btn-primary btn-block">
+            {% if user.is_authenticated %}
+            <a href="{% url 'place-order' %}" class="btn btn-primary btn-block">
               Checkout
             </a>
+            {% else %}
+            <a href="{% url 'sign_in' %}" class="btn btn-primary btn-block">
+              Checkout
+            </a>
+            {% endif %}
+
             <a href="/" class="btn btn-light btn-block">Continue Shopping</a>
           </div>
           <!-- card-body.// -->
