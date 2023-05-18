@@ -16,6 +16,13 @@ class Product(models.Model):
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)
     name = models.CharField(max_length=200,null=True)
     price = models.FloatField(default=0)
+    
+    info = models.TextField(null=True)
+    ram = models.CharField(max_length=200,null=True)
+    os = models.CharField(max_length=200,null=True)
+    memory = models.CharField(max_length=200,null=True)
+    pin = models.CharField(max_length=200,null=True)
+    
     image = models.ImageField(null=True,blank=True)
 
     def __str__(self):
@@ -31,6 +38,7 @@ class Order(models.Model):
     customer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)
     date_order = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False,null=True,blank=False)
+
     transaction_id = models.CharField(max_length=200,null=True,)
 
     def __str__(self):
@@ -49,6 +57,7 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
+
 # class ShippingAddress(models.Model):
 #     customer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)
 #     order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)

@@ -13,7 +13,7 @@
         </div>
 
         <div class="col-lg col-md-6 col-sm-12 col">
-          <form action="{% url 'search' %}" class="search" method="POST">
+          <form action="{% url 'category' %}" class="search" method="POST">
             {% csrf_token %}
             <div class="input-group w-100">
               <input
@@ -45,15 +45,18 @@
 
               <div>
                 {% if user.is_authenticated %}
+
+                <span><a href="{% url 'history' %}">History</a></span>
+                <span class="dark-transp"> | </span>
                 <span><a href="{% url 'logout' %}">Logout</a></span>
                 {% else %}
-                <a href="sign_in.html">Sign in</a>
+                <a href="{% url 'sign_in' %}">Sign in</a>
                 <span class="dark-transp"> | </span>
-                <a href="register.html"> Register</a>
+                <a href="{% url 'register' %}"> Register</a>
                 {% endif %}
               </div>
             </div>
-            <a href="cart.html" class="widget-header pl-3 ml-3">
+            <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
               <div class="icon icon-sm rounded-circle border">
                 <i class="fa fa-shopping-cart"></i>
               </div>
